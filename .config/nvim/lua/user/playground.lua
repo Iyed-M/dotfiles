@@ -1,0 +1,101 @@
+local harpoon = require("harpoon")
+harpoon:new()
+vim.print(harpoon:info())
+-- local M = {}
+-- local getCopilotBuf = function()
+--   local bufs = vim.api.nvim_list_bufs()
+--   for _, buf in ipairs(bufs) do
+--     if vim.endswith(vim.api.nvim_buf_get_name(buf), "copilot-chat") then
+--       return buf
+--     end
+--   end
+-- end
+-- function M.run()
+--   require("CopilotChat").open()
+--   require("CopilotChat").close()
+--   require("CopilotChat").close()
+--   local Popup = require("nui.popup")
+--   local Layout = require("nui.layout")
+--
+--   local commands = {
+--     "ls",
+--     "eza",
+--   }
+--   local popup_one, popup_two =
+--     Popup({
+--       relative = "win",
+--       enter = true,
+--       border = "rounded",
+--       bufnr = getCopilotBuf(),
+--     }), Popup({
+--       border = "rounded",
+--     })
+--
+--   local layout = Layout(
+--     {
+--       position = "50%",
+--       size = {
+--         width = "70%",
+--         height = "70%",
+--       },
+--     },
+--
+--     Layout.Box({
+--       Layout.Box(popup_one, { size = "40%" }),
+--       Layout.Box(popup_two, { size = "60%" }),
+--     }, { dir = "row" })
+--   )
+--
+--   local current_dir = "row"
+--   popup_one:map("n", "r", function()
+--     if current_dir == "col" then
+--       layout:update(Layout.Box({
+--         Layout.Box(popup_one, { size = "40%" }),
+--         Layout.Box(popup_two, { size = "60%" }),
+--       }, { dir = "row" }))
+--
+--       current_dir = "row"
+--     else
+--       layout:update(Layout.Box({
+--         Layout.Box(popup_two, { size = "60%" }),
+--         Layout.Box(popup_one, { size = "40%" }),
+--       }, { dir = "col" }))
+--
+--       current_dir = "col"
+--     end
+--   end, {})
+--   popup_one:map("n", "q", function()
+--     vim.cmd("q")
+--   end, {})
+--   popup_one:map("n", "o", function()
+--     local buf = popup_two.bufnr
+--
+--     vim.api.nvim_buf_set_lines(buf, -1, -1, false, { "hello", "world", "hi" })
+--   end, {})
+--
+--   layout:mount()
+--   vim.api.nvim_win_set_var(layout.winid, "IS_NUI", true)
+--   vim.api.nvim_win_set_var(popup_two.winid, "IS_NUI", true)
+--   vim.api.nvim_win_set_var(popup_two.winid, "IS_NUI", true)
+--   vim.print("ID_1 = ", popup_one.winid)
+--   vim.api.nvim_create_autocmd("WinEnter", {
+--     pattern = "copilot-chat",
+--     group = vim.api.nvim_create_augroup("MY_GRP", {}),
+--
+--     callback = function()
+--       for _, x in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+--         local found, res = pcall(vim.api.nvim_win_get_var, x, "IS_NUI")
+--         if
+--           vim.endswith(vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(x)), "copilot-chat")
+--           and not found
+--           and not res
+--         then
+--           vim.api.nvim_win_close(x, true)
+--         end
+--       end
+--     end,
+--   })
+-- end
+-- M.run()
+--
+-- return M
