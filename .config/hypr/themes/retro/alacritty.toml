@@ -1,0 +1,39 @@
+
+# TokyoNight Alacritty Colors
+# Default colors
+[colors.primary]
+
+background = '#1D2437'
+foreground = '#AEB5EA'
+
+# Normal colors
+[colors.normal]
+black = '#131620'
+red = "#EB5A61"
+green = "#73E583"
+yellow = "#B9DA6A"
+blue = "#5677F3"
+magenta = "#AD6FF1"
+cyan = "#5db3f0"
+white = '#C0C5EF'
+
+
+# Bright colors
+[colors.bright]
+black = '#25304B'
+red = "#EB5A61"
+green = "#73E583"
+yellow = "#B9DA6A"
+blue = "#5677F3"
+magenta = "#AD6FF1"
+cyan = "#5db3f0"
+white = '#D2D4F3'
+
+# Indexed Colors
+[[colors.indexed_colors]]
+index = 16
+color = '#f0975c'
+
+[[colors.indexed_colors]]
+index = 17
+color = '#db4b4b'
