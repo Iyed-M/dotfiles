@@ -13,3 +13,10 @@
 --     vim.api.nvim_set_hl(0, "Cursor", { background = "#0DB9D7", foreground = "#0DB9D7" })
 --   end,
 -- })
+vim.api.nvim_create_autocmd({ "BufNew", "BufEnter" }, {
+  group = vim.api.nvim_create_augroup("USER_HYPRLANG", {}),
+  pattern = "*.conf",
+  callback = function()
+    vim.cmd("set filetype=hyprlang")
+  end,
+})
