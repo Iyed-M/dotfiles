@@ -1,4 +1,0 @@
-import = [
-  "~/.config/alacritty/alacritty.toml",
-  "~/.config/hypr/modules/alacritty/current_theme.toml",
-]

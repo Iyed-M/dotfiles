@@ -50,7 +50,7 @@ set -x GOBIN $GOPATH/bin
 set -x BROWSER brave
 set -x FILEMANAGER thunar
 set -x EDITOR nvim
-set -x TERMINAL alacritty
+set -x TERMINAL wezterm
 set -x terminal $TERMINAL
 set -x VISUAL nvim
 
@@ -138,7 +138,7 @@ zoxide init fish | source
 if status --is-interactive
     source ("/usr/bin/starship" init fish --print-full-init | psub)
     function starship_transient_prompt_func
-      starship module character
+        starship module character
     end
     enable_transience
 
