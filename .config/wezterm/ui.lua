@@ -1,0 +1,27 @@
+local wezterm = require("wezterm")
+
+local M = {}
+
+M.use_fancy_tab_bar = false
+M.hide_tab_bar_if_only_one_tab = true
+M.tab_bar_at_bottom = false
+M.window_frame = {
+	font = wezterm.font({ family = "Iosevka NF", weight = "Bold" }),
+	font_size = 20,
+	active_titlebar_bg = "#1a1b26",
+	inactive_titlebar_bg = "#1a1b26",
+}
+
+M.font = wezterm.font({
+	family = "JetbrainsMono Nerd Font",
+	harfbuzz_features = { "ss01", "ss02", "ss03", "ss05", "ss06", "ss07", "ss08", "calt", "dlig" },
+	weight = "Medium",
+	italic = false,
+})
+M.font_size = 13.5
+M.line_height = 1.05
+
+M.window_background_opacity = 0.8
+M.color_schemes = require("themes")
+M.color_scheme = "idx"
+return M
