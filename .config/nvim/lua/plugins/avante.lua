@@ -1,30 +1,55 @@
----@type LazySpec
-local avanteSPec = {
+if false then
+  require("avante")
+end
+return {
   "yetone/avante.nvim",
   event = "VeryLazy",
-  build = "make", -- This is Optional, only if you want to use tiktoken_core to calculate tokens count
-  dependencies = {
-    "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-    "stevearc/dressing.nvim",
-    "nvim-lua/plenary.nvim",
-    "MunifTanjim/nui.nvim",
-    "zbirenbaum/copilot.lua",
-  },
-  ---@type avante.Config
+  version = false, -- set this if you want to always pull the latest change
   opts = {
-    provider = "copilot",
+    ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
+    provider = "copilot", -- Recommend using Claude
+    copilot = {
+      model = "claude-3.5-sonnet",
+    },
+    ---Specify the special dual_boost mode
+    ---1. enabled: Whether to enable dual_boost mode. Default to false.
+    ---2. first_provider: The first provider to generate response. Default to "openai".
+    ---3. second_provider: The second provider to generate response. Default to "claude".
+    ---4. prompt: The prompt to generate response based on the two reference outputs.
+    ---5. timeout: Timeout in milliseconds. Default to 60000.
+    ---How it works:
+    --- When dual_boost is enabled, avante will generate two responses from the first_provider and second_provider respectively. Then use the response from the first_provider as provider1_output and the response from the second_provider as provider2_output. Finally, avante will generate a response based on the prompt and the two reference outputs, with the default Provider as normal.
+    ---Note: This is an experimental feature and may not work as expected.
+    dual_boost = {
+      enabled = false,
+      first_provider = "openai",
+      second_provider = "claude",
+      prompt = "Based on the two reference outputs below, generate a response that incorporates elements from both but reflects your own judgment and unique perspective. Do not provide any explanation, just give the response directly. Reference Output 1: [{{provider1_output}}], Reference Output 2: [{{provider2_output}}]",
+      timeout = 60000, -- Timeout in milliseconds
+    },
+    behaviour = {
+      auto_suggestions = false, -- Experimental stage
+      auto_set_highlight_group = true,
+      auto_set_keymaps = true,
+      auto_apply_diff_after_generation = false,
+      support_paste_from_clipboard = false,
+    },
     mappings = {
-      ask = "<leader>aa",
-      edit = "<leader>ae",
-      refresh = "<leader>ar",
       --- @class AvanteConflictMappings
       diff = {
         ours = "co",
         theirs = "ct",
-        none = "c0",
+        all_theirs = "ca",
         both = "cb",
+        cursor = "cc",
         next = "]x",
         prev = "[x",
+      },
+      suggestion = {
+        accept = "<M-l>",
+        next = "<M-]>",
+        prev = "<M-[>",
+        dismiss = "<C-]>",
       },
       jump = {
         next = "]]",
@@ -34,18 +59,38 @@ local avanteSPec = {
         normal = "<CR>",
         insert = "<C-s>",
       },
-      toggle = {
-        debug = "<leader>ad",
-        hint = "<leader>ah",
+      sidebar = {
+        apply_all = "A",
+        apply_cursor = "a",
+        switch_windows = "<Tab>",
+        reverse_switch_windows = "<S-Tab>",
       },
     },
-    hints = { enabled = false },
+    hints = { enabled = true },
     windows = {
+      ---@type "right" | "left" | "top" | "bottom"
+      position = "right", -- the position of the sidebar
       wrap = true, -- similar to vim.o.wrap
-      width = 30, -- default % based on available width
+      width = 50, -- default % based on available width
       sidebar_header = {
-        align = "right", -- left, center, right for title
-        rounded = false,
+        enabled = true, -- true, false to enable/disable the header
+        align = "center", -- left, center, right for title
+        rounded = true,
+      },
+      input = {
+        prefix = "> ",
+        height = 8, -- Height of the input window in vertical layout
+      },
+      edit = {
+        border = "rounded",
+        start_insert = false, -- Start insert mode when opening the edit window
+      },
+      ask = {
+        floating = false, -- Open the 'AvanteAsk' prompt in a floating window
+        start_insert = true, -- Start insert mode when opening the ask window
+        border = "rounded",
+        ---@type "ours" | "theirs"
+        focus_on_apply = "theirs", -- which diff to focus after applying
       },
     },
     highlights = {
@@ -57,12 +102,33 @@ local avanteSPec = {
     },
     --- @class AvanteConflictUserConfig
     diff = {
-      debug = false,
       autojump = true,
       ---@type string | fun(): any
       list_opener = "copen",
+      --- Override the 'timeoutlen' setting while hovering over a diff (see :help timeoutlen).
+      --- Helps to avoid entering operator-pending mode with diff mappings starting with `c`.
+      --- Disable by setting to -1.
+      override_timeoutlen = 500,
+    },
+  },
+  -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+  build = "make",
+  -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter",
+    "stevearc/dressing.nvim",
+    "nvim-lua/plenary.nvim",
+    "MunifTanjim/nui.nvim",
+    --- The below dependencies are optional,
+    "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+    "zbirenbaum/copilot.lua", -- for providers='copilot'
+    {
+      -- Make sure to set this up properly if you have lazy=true
+      "MeanderingProgrammer/render-markdown.nvim",
+      opts = {
+        file_types = { "markdown", "Avante" },
+      },
+      ft = { "markdown", "Avante" },
     },
   },
 }
-
-return avanteSPec

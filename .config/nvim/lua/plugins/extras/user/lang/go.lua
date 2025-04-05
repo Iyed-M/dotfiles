@@ -1,3 +1,4 @@
+if true then return {} end
 return {
   "olexsmir/gopher.nvim",
   ft = "go",
@@ -15,8 +16,7 @@ return {
         iferr = "iferr",
       },
     })
-    local map = vim.keymap.set
-    map("n", "<leader>le", "<cmd>:GoIfErr<CR>", { desc = "Go - If Err" })
+    vim.keymap.set("n", "<leader>le", "<cmd>:GoIfErr<CR>", { desc = "Go - If Err" })
   end,
   build = function()
     vim.cmd([[silent! GoInstallDeps]])

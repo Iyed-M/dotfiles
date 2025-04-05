@@ -1,6 +1,6 @@
 -- This file is automavically loaded by plugins.core
 -- Enable LazyVim auto format
-
+vim.g.snacks_animate = true
 vim.g.autoformat = true
 
 -- LazyVim root dir detection
@@ -14,6 +14,8 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 --  * enables nerd font icons
 -- Set to false to disable.
 vim.g.lazygit_config = true
+
+vim.g.matchup_matchparen_enabled = 0
 
 -- Optionally setup the terminal to use
 -- This sets `vim.o.shell` and does some additional configuration for:
@@ -32,14 +34,16 @@ if not vim.env.SSH_TTY then
   opt.clipboard = "unnamedplus" -- Sync with system clipboard
 end
 -- n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
-
-opt.guicursor = "n-v-c-i:block" -- Hide cursor in normal mode
+vim.g.nvchad_enabled = false
+-- vim.opt.guicursor = "n-v-c-sm:block-Cursor,i-ci-ve:ver25-Cursor"
+-- vim.opt.guicursor = "n-v-c-sm:block-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor20-Cursor"
+-- vim.opt.guicursor = "n-v-c:block,i:block-Cursor"
 opt.swapfile = false
-opt.completeopt = "menu,menuone,noselect"
+-- opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 2 -- Hide * markup for bold and italic, but not markers with substitutions
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
 opt.cursorline = false -- Enable highlighting of the current line
-opt.expandtab = false -- Use spaces instead of tabs
+opt.expandtab = true -- Use spaces instead of tabs
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
@@ -55,7 +59,6 @@ opt.relativenumber = true -- Relative line numbers
 opt.scrolloff = 4 -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 opt.shiftround = true -- Round indent
-opt.shiftwidth = 3 -- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.showmode = false -- Dont show mode since we have a statusline
 opt.sidescrolloff = 8 -- Columns of context
@@ -66,7 +69,8 @@ opt.spelllang = { "en" }
 opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
-opt.tabstop = 3 -- Number of spaces tabs count for
+opt.shiftwidth = 4 -- Size of an indent
+opt.tabstop = 4 -- Number of spaces tabs count for
 
 opt.termguicolors = true -- True color support
 if not vim.g.vscode then
@@ -87,16 +91,14 @@ opt.fillchars = {
   diff = "╱",
   eob = " ",
 }
-
 if vim.fn.has("nvim-0.10") == 1 then
   opt.smoothscroll = true
 end
 
 -- Folding
 vim.opt.foldlevel = 99
-
 if vim.fn.has("nvim-0.9.0") == 1 then
-  vim.opt.statuscolumn = [[%!v:lua.require'lazyvim.util'.ui.statuscolumn()]]
+  opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
   vim.opt.foldtext = "v:lua.require'lazyvim.util'.ui.foldtext()"
 end
 
@@ -116,3 +118,9 @@ vim.g.markdown_recommended_style = 0
 --separate tab from C-i
 vim.cmd([[autocmd UIEnter * if v:event.chan ==# 0 | call chansend(v:stderr, "\x1b[>1u") | endif]])
 vim.cmd([[autocmd UILeave * if v:event.chan ==# 0 | call chansend(v:stderr, "\x1b[<1u") | endif]])
+
+-- Set to "intelephense" to use intelephense instead of phpactor.
+vim.g.lazyvim_php_lsp = "intelephense"
+
+-- Enable this option to avoid conflicts between Biome and Prettier.
+vim.g.lazyvim_prettier_needs_config = true

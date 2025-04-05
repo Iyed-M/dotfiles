@@ -1,12 +1,8 @@
-local settings = require("settings")
-if false then
-  require("frecency")
-end
 return {
   {
     "danielfalk/smart-open.nvim",
     branch = "0.2.x",
-    enabled = settings.fild_finder == "smart_open",
+    enabled = true,
     dependencies = {
       "kkharji/sqlite.lua",
       -- Only required if using match_algorithm fzf
@@ -26,20 +22,6 @@ return {
           },
         },
       })
-    end,
-  },
-  {
-    "nvim-telescope/telescope-frecency.nvim",
-    enabled = settings.fild_finder == "frecency",
-    config = function()
-      require("frecency").setup({
-        workspaces = {
-          ["r"] = "/home/iyed/projects/ican/frontend/src/routes",
-          ["c"] = "/home/iyed//projects/ican/frontend/src/components/",
-          ["p"] = "/home/iyed/projects/ican/frontend/src/pages",
-        },
-      })
-      require("telescope").load_extension("frecency")
     end,
   },
 }

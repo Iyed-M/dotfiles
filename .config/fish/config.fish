@@ -1,4 +1,3 @@
-
 #          ╭──────────────────────────────────────────────────────────╮
 #          │                      Env Variables                       │
 #          ╰──────────────────────────────────────────────────────────╯
@@ -7,7 +6,10 @@
 # Hide welcome message & ensure we are reporting fish as shell
 set fish_greeting
 set VIRTUAL_ENV_DISABLE_PROMPT 1
-set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+# set -x MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -x TAVILY_API_KEY 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
+
+set -x MANPAGER nvimpager
 set -x SHELL /usr/bin/fish
 
 set -x QT_QPA_PLATFORMTHEME qt5ct
@@ -45,19 +47,17 @@ set -x GTK2_RC_FILES $XDG_CONFIG_HOME/gtk-2.0/gtkrc
 set -x RUSTUP_HOME $XDG_DATA_HOME/rustup
 set -x GOPATH $XDG_DATA_HOME/go
 set -x GOBIN $GOPATH/bin
-
-# ━━ Default Apps ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-set -x BROWSER brave
+fish_add_path -P $GOBIN
+set -x BROWSER zen-browser
 set -x FILEMANAGER thunar
 set -x EDITOR nvim
-set -x TERMINAL wezterm
+set -x TERMINAL kitty
 set -x terminal $TERMINAL
 set -x VISUAL nvim
+set NVIM_APPNAME nvim
 
 set WGPU_BACKEND gl
 set WARP_ENABLE_WAYLAND 1
-set wallpath /home/mhiri/Pictures/good/
-
 
 #          ╭──────────────────────────────────────────────────────────╮
 #          │                           path                           │
@@ -70,30 +70,8 @@ if test -d ~/.local/bin
     end
 end
 
-set -Ua fish_user_paths /home/mhiri/.local/share/cargo/bin
+set -Ua fish_user_paths /home/iyed/.local/share/cargo/bin
 fish_add_path -U $CARGO_HOME/bin
-
-# pnpm
-set -gx PNPM_HOME "/home/mhiri/.local/share/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-    set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
-
-# Turso
-
-set TURSO "/home/mhiri/.turso"
-fish_add_path -U $TURSO
-set -gx BUN_INSTALL "$HOME/.bun"
-fish_add_path -U $BUN_INSTALL/bin
-
-fish_add_path -U $GOPATH
-fish_add_path -U $GOBIN
-
-set cf $XDG_CONFIG_HOME
-set cm_conf $XDG_CONFIG_HOME/chezmoi/chezmoi.toml
-set cm_data $XDG_DATA_HOME/chezmoi
-
 
 # ━━ Functions needed for !! and !$ https://github.com/oh-my-fish/plugin-bang-bang ━━
 function __history_previous_command
@@ -124,14 +102,12 @@ else
     bind '$' __history_previous_command_arguments
 end
 
-
 source ~/.config/fish/alias.fish
 source ~/.config/fish/binds.fish
 
 #          ╭──────────────────────────────────────────────────────────╮
 #          │                           init                           │
 #          ╰──────────────────────────────────────────────────────────╯
-
 
 zoxide init fish | source
 
@@ -141,14 +117,6 @@ if status --is-interactive
         starship module character
     end
     enable_transience
-
-    if test -x /usr/bin/pfetch
-        pfetch
-    else
-        if test -x /usr/bin/neofetch
-            neofetch --ascii_colors 6 6 2 2 2 2
-        end
-    end
 end
 
 source ~/.config/fish/current_theme.fish

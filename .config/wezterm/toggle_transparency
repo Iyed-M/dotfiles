@@ -1,0 +1,10 @@
+#!/bin/bash
+
+file_path="/home/iyed/dotfiles/.config/wezterm/ui.lua"
+opacity=0.6
+
+if /usr/bin/grep -q "M.window_background_opacity = $opacity" "$file_path"; then
+	sed -i "s/M.window_background_opacity = $opacity/M.window_background_opacity = 1/" "$file_path"
+else
+	sed -i "s/M.window_background_opacity = 1/M.window_background_opacity = $opacity/" "$file_path"
+fi

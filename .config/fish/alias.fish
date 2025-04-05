@@ -27,15 +27,15 @@ if test -x /usr/bin/lazygit
     alias lg lazygit
 end
 if test -x /usr/bin/nvim
-    alias v "nvim"
+    alias v nvim
 end
 
 if test -x /usr/bin/lazydocker
-    alias ldk "lazydocker"
+    alias ldk lazydocker
 end
 if test -x /usr/bin/docker
-    alias dk "lazydocker"
-    alias dkc "docker-compose"
+    alias dk lazydocker
+    alias dkc docker-compose
 end
 
 if test -x /usr/bin/wezterm

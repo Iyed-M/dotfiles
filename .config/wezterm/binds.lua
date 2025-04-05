@@ -6,6 +6,16 @@ M.leader = { key = "a", mods = "ALT", timeout_milliseconds = 1000 }
 M.keys = {
 
 	-- ── Defaults ─────────────────────────────────{
+	--
+	{
+		key = "t", -- The key you want to bind
+		mods = "ALT", -- The modifiers (e.g., CTRL, SHIFT, ALT)
+		action = wezterm.action_callback(function(window, pane)
+			local cmd = "/home/iyed/dotfiles/.config/wezterm/toggle_transparency"
+			wezterm.log_info("Executing shell command: " .. cmd)
+			os.execute(cmd)
+		end),
+	},
 	{ key = ")", mods = "SHIFT|CTRL", action = act.ResetFontSize },
 	{ key = "P", mods = "SHIFT|CTRL", action = act.ActivateCommandPalette },
 	{ key = "R", mods = "SHIFT|CTRL", action = act.ReloadConfiguration },

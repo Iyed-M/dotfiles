@@ -37,36 +37,6 @@ return {
       },
     },
   },
-
-  {
-    "stevearc/dressing.nvim",
-    config = function()
-      require("dressing").setup({
-        select = {
-          -- Set to false to disable the vim.ui.select implementation
-          enabled = true,
-
-          -- Priority list of preferred vim.select implementations
-          -- backend = { "builtin", "fzf_lua", "fzf", "builtin", "nui" },
-          backend = { "fzf", "builtin", "nui" },
-
-          -- Trim trailing `:` from prompt
-          trim_prompt = true,
-
-          -- Options for telescope selector
-          -- These are passed into the telescope picker directly. Can be used like:
-          -- telescope = require('telescope.themes').get_ivy({...})
-        },
-
-        -- Used to override format_item. See :help dressing-format
-        format_item_override = {},
-
-        -- see :help dressing_get_config
-        get_config = nil,
-      })
-    end,
-  },
-
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
@@ -188,6 +158,7 @@ return {
             return 0
           end,
           mappings = {
+
             i = {
               ["<c-t>"] = open_with_trouble,
               ["<a-t>"] = open_selected_with_trouble,
@@ -196,11 +167,13 @@ return {
               ["<c-v>"] = actions.select_vertical,
               ["<C-Down>"] = actions.cycle_history_next,
               ["<C-Up>"] = actions.cycle_history_prev,
-              ["<C-f>"] = actions.preview_scrolling_down,
+              ["<C-u>"] = actions.preview_scrolling_down,
               ["<C-b>"] = actions.preview_scrolling_up,
             },
             n = {
               ["q"] = actions.close,
+              ["<c-t>"] = open_with_trouble,
+              ["<a-t>"] = open_selected_with_trouble,
             },
           },
         },

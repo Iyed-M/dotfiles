@@ -2,7 +2,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    dependencies = { "yioneko/nvim-vtsls" },
+    -- dependencies = { "yioneko/nvim-vtsls" },
     opts = {
       -- make sure mason installs the server
       servers = {
@@ -155,6 +155,47 @@ return {
             vim.tbl_deep_extend("force", {}, opts.settings.typescript, opts.settings.javascript or {})
         end,
       },
+    },
+  },
+  ---@type LazyPluginSpec
+  {
+    "dmmulroy/tsc.nvim",
+    -- event = "VeryLazy",
+    ft = { "typescript", "typescriptreact" },
+    keys = {
+      {
+        "<Leader>lss",
+        "<cmd>TSCStop<cr>",
+        desc = "TSC stop",
+      },
+      {
+        "<Leader>lso",
+        "<cmd>TSCOpen<cr>",
+        desc = "TSC stop",
+      },
+      {
+        "<Leader>lss",
+        "<cmd>TSC<cr>",
+        desc = "TSC start",
+      },
+      {
+        "<Leader>lsl",
+        "<cmd>TSCClose<cr>",
+        desc = "TSCClose",
+      },
+    },
+    opts = {
+      auto_open_qflist = true,
+      use_trouble_qflist = true,
+      run_as_monorepo = true,
+      enable_progress_notifications = true,
+      enable_error_notifications = true,
+      -- flags = {
+      --   watch = true,
+      -- },
+      hide_progress_notifications_from_history = true,
+      spinner = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
+      pretty_errors = true,
     },
   },
 }

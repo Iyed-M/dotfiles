@@ -1,22 +1,23 @@
--- vim.api.nvim_create_autocmd("InsertLeavePre", {
---   group = vim.api.nvim_create_augroup("ChangeCursorGroupEnter", {}),
+-- Create an autocommand group for kitty_cursor
+-- local kitty_cursor_group = vim.api.nvim_create_augroup("kitty_cursor", { clear = true })
+
+-- Add an autocommand to change the cursor style on Colorscheme event
+-- vim.api.nvim_create_autocmd("Colorscheme", {
+--   group = kitty_cursor_group,
 --   callback = function()
---     vim.api.nvim_set_hl(0, "lCursor", { background = "#0DB9D7", foreground = "#0DB9D7" })
---     vim.api.nvim_set_hl(0, "CursorIM", { background = "#0DB9D7", foreground = "#0DB9D7" })
---     vim.api.nvim_set_hl(0, "TermCursor", { background = "#0DB9D7", foreground = "#0DB9D7" })
+--     vim.opt.guicursor = "n-v-c-sm:block-Cursor,i-ci-ve:ver25-Cursor,r-cr-o:hor20-Cursor"
 --   end,
 -- })
+
 --
--- vim.api.nvim_create_autocmd("InsertEnter", {
---   group = vim.api.nvim_create_augroup("ChangeCursorGroupLeave", {}),
+-- vim.api.nvim_create_autocmd({ "BufNew", "BufEnter" }, {
+--   group = vim.api.nvim_create_augroup("USER_HYPRLANG", {}),
+--   pattern = "*.conf",
 --   callback = function()
---     vim.api.nvim_set_hl(0, "Cursor", { background = "#0DB9D7", foreground = "#0DB9D7" })
+--     vim.cmd("set filetype=hyprlang")
+--   end,
+--   group = vim.api.nvim_create_augroup("USER_Illuminate", {}),
+--   callback = function()
+--     require("illuminate").invisible_buf()
 --   end,
 -- })
-vim.api.nvim_create_autocmd({ "BufNew", "BufEnter" }, {
-  group = vim.api.nvim_create_augroup("USER_HYPRLANG", {}),
-  pattern = "*.conf",
-  callback = function()
-    vim.cmd("set filetype=hyprlang")
-  end,
-})

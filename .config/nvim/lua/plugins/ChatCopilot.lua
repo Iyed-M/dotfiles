@@ -45,11 +45,12 @@ return {
       local chat = require("CopilotChat")
       ---@type CopilotChat.config
       local M = {
+
         debug = false, -- Enable debug logging
         proxy = nil, -- [protocol://]host[:port] Use this proxy
         allow_insecure = false, -- Allow insecure server connections
 
-        model = "gpt-4o", -- GPT model to use, 'gpt-3.5-turbo', 'gpt-4', or 'gpt-4o'
+        model = "claude-3.5-sonnet", -- GPT model to use, 'gpt-3.5-turbo', 'gpt-4', or 'gpt-4o'
 
         question_header = "- **User** ", -- Header to use for user questions
         answer_header = "- **Copilot** ", -- Header to use for AI answers
@@ -64,7 +65,6 @@ return {
 
         context = "buffers", -- Default context to use, 'buffers', 'buffer' or none (can be specified manually in prompt via @).
         history_path = vim.fn.stdpath("data") .. "/copilotchat_history", -- Default path to stored history
-        callback = function() end, -- Callback to use when ask response is received
 
         -- default selection (visual or line)
 
@@ -77,7 +77,10 @@ return {
             normal = "q",
             insert = "<C-c>",
           },
-          reset = {},
+          reset = {
+            normal = "",
+            insert = "",
+          },
           submit_prompt = {
             normal = "<CR>",
             insert = "<C-s>",

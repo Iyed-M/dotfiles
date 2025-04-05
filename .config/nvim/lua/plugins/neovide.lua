@@ -6,13 +6,13 @@ vim.g.neovide_confirm_quit = true
 vim.g.neovide_profiler = false
 vim.g.neovide_remember_window_size = false
 vim.g.neovide_cursor_animate_command_line = false
-
-vim.g.neovide_fullscreen = false
-vim.g.neovide_maximized = false
-vim.o.guifont = "JetBrainsMonoNL Nerd Font:h12:5"
+-- vim.g.neovide_line_spacing = 2 -- Adjust the number to increase/decrease line spacing
+-- linespace
+vim.cmd("set linespace=2")
+vim.o.guifont = "Maple Mono SC NF:h12"
 vim.g.neovide_scale_factor = 1
 vim.g.neovide_theme = "auto"
-vim.g.neovide_transparency = 0.87
+vim.g.neovide_transparency = 0.5
 
 vim.g.neovide_scroll_animation_length = 0.5
 vim.g.neovide_cursor_animation_length = 0.05

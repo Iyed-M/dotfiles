@@ -22,7 +22,8 @@ local ui = require("ui")
 for key, value in pairs(ui) do
 	config[key] = value
 end
-config.enable_wayland = false
+config.enable_wayland = true
+config.window_close_confirmation = "NeverPrompt"
 
 -- local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
 -- smart_splits.apply_to_config(config, {
