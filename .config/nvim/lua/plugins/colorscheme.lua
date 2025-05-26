@@ -59,8 +59,8 @@ return {
     lazy = true,
     ---@param opts tokyonight.Config
     config = function(_, opts)
-      opts.on_highlights = highlights
-      opts.on_colors = colors
+      -- opts.on_highlights = highlights
+      -- opts.on_colors = colors
       opts.italic = true
       opts.bold = true
       opts.inactive_statusline = true

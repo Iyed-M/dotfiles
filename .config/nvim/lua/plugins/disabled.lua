@@ -1,5 +1,5 @@
 return {
-  { "akinsho/bufferline.nvim", enabled = false },
+  { "akinsho/bufferline.nvim", enabled = true },
   { "nvim-neo-tree/neo-tree.nvim", enabled = true },
   { "nvim-lualine/lualine.nvim", enabled = true },
   { "nvimdev/dashboard-nvim", enabled = true },

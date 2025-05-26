@@ -4,12 +4,17 @@ local map = vim.keymap.set
 local function nmap(key, action, desc)
   map("n", key, action, { desc = desc })
 end
+
+-- Function to remap <Leader>f prefixed keymaps to <Leader><Space>
+
+-- Call the function to remap the bindings
 local safeNoMap = function(key)
   pcall(vim.keymap.del, "n", key)
 end
 --disabled
 
 safeNoMap("<leader>cF")
+safeNoMap("<Leader><Space>")
 safeNoMap("<leader>cm")
 safeNoMap("<leader>bl")
 safeNoMap("<leader>br")
@@ -73,10 +78,6 @@ nmap("<leader>uo", function()
 end, "Toggle lsp highlights")
 -- split
 nmap("|", "<cmd>vsplit<cr>", "Split vertical")
-nmap("<Leader>|", function()
-  vim.cmd("vsplit")
-  require("telescope").extensions.smart_open.smart_open({ cwd_only = true, filename_first = true })
-end, "vsplit")
 
 nmap("-", "<cmd>split<cr>", "vsplit")
 -- ── smart splits ──────────────────────────────────────────────
@@ -121,31 +122,29 @@ if Util.has("smart-splits.nvim") then
     splits.resize_right()
   end, { desc = "SmartSplits - Resize Right" })
 
-  map("n", "<leader><leader>h", function()
+  map("n", "<leader>wh", function()
     splits.swap_buf_left()
   end, { desc = "SmartSplits - Swap Buffer Left" })
-  map("n", "<leader><leader>j", function()
+  map("n", "<leader>wj", function()
     splits.swap_buf_down()
   end, { desc = "SmartSplits - Swap Buffer Down" })
-  map("n", "<leader><leader>k", function()
+  map("n", "<leader>wk", function()
     splits.swap_buf_up()
   end, { desc = "SmartSplits - Swap Buffer Up" })
-  map("n", "<leader><leader>l", function()
+  map("n", "<leader>wl", function()
     splits.swap_buf_right()
   end, { desc = "SmartSplits - Swap Buffer Right" })
 end
+--files
+nmap("<Leader><Space>", function()
+  Snacks.picker.smart({ multi = { "files" } })
+end, "smart find files")
 
 -- ── lazygit ───────────────────────────────────────────────────
 map({ "n", "v" }, "<leader>lg", function()
   require("snacks").lazygit({ cwd = LazyVim.root.git() })
 end, { desc = "Lazygit (Root Dir)" })
 -- ── term ──────────────────────────────────────────────────────
-
---telescope
-nmap("<Leader>sz", "<Cmd>Telescope zoxide list<CR>", "telescope zoxide")
-map("n", "<leader>f", function()
-    require("telescope").extensions.smart_open.smart_open({ cwd_only = true, filename_first = true })
-end, { desc = "find files" })
 
 -- ── floating terminal ─────────────────────────────────────────
 

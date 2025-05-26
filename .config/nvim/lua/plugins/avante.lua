@@ -5,8 +5,8 @@ return {
   "yetone/avante.nvim",
   event = "VeryLazy",
   version = false, -- set this if you want to always pull the latest change
+  ---@type avante.Config
   opts = {
-    ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
     provider = "copilot", -- Recommend using Claude
     copilot = {
       model = "claude-3.5-sonnet",
@@ -120,7 +120,7 @@ return {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
     --- The below dependencies are optional,
-    "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+    "echasnovski/mini.icons",
     "zbirenbaum/copilot.lua", -- for providers='copilot'
     {
       -- Make sure to set this up properly if you have lazy=true
