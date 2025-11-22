@@ -1,3 +1,6 @@
+if false then
+  local github = require("github-theme")
+end
 ---@diagnostic disable: inject-field
 ---@param M  ColorScheme
 local colors = function(M) end
@@ -32,15 +35,16 @@ local highlights = function(hl, c)
   -- hl.TSRainbowViolet = { fg = c.purple }
   -- hl.TSRainbowCyan = { fg = c.cyan }
 
-  hl["@lsp.type.operator"] = { link = "@operator" }
-  hl["Identifier"] = { fg = "#78ccf0" }
-  -- hl["String"] = { fg = "#ddc29c" }
-  hl["Keyword"] = { fg = "#c790ea" }
-  hl["@keyword"] = { fg = "#c790ea" }
-  hl["Statement"] = { fg = "#c792ea" }
-  hl["Conditional"] = { fg = "#c792ea" }
-  hl["@property"] = { fg = "#baebe2" }
-  hl["@object.key"] = { link = "@property" }
+  -- hl["@lsp.type.operator"] = { link = "@operator" }
+  -- hl["Identifier"] = { fg = "#78ccf0" }
+  -- -- hl["String"] = { fg = "#ddc29c" }
+  -- hl["Keyword"] = { fg = "#c790ea" }
+  -- hl["@keyword"] = { fg = "#c790ea" }
+  -- hl["Statement"] = { fg = "#c792ea" }
+  -- hl["Conditional"] = { fg = "#c792ea" }
+  -- hl["@property"] = { fg = "#baebe2" }
+  -- hl["@object.key"] = { link = "@property" }
+  vim.api.nvim_set_hl(0, "CusCursor", { bg = "#FFC777" })
 end
 return {
   {
@@ -59,7 +63,7 @@ return {
     lazy = true,
     ---@param opts tokyonight.Config
     config = function(_, opts)
-      -- opts.on_highlights = highlights
+      opts.on_highlights = highlights
       -- opts.on_colors = colors
       opts.italic = true
       opts.bold = true
@@ -77,6 +81,33 @@ return {
       opts.styles.floats = "transparent"
       require("tokyonight").setup(opts)
       vim.cmd("colorscheme tokyonight")
+    end,
+  },
+  {
+    "projekt0n/github-nvim-theme",
+    name = "github-theme",
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other start plugins
+    config = function()
+      ---@type GhTheme.Config
+      local config = {
+        options = {
+          terminal_colors = true,
+          transparent = true,
+          modules = {
+            cmp = true,
+            lsp_trouble = true,
+            mini = true,
+            native_lsp = true,
+            neotree = true,
+            telescope = true,
+            whichkey = true,
+          },
+        },
+      }
+      require("github-theme").setup(config)
+
+      vim.cmd("colorscheme github_dark")
     end,
   },
 }

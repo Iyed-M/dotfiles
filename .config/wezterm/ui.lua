@@ -5,26 +5,26 @@ local M = {}
 M.use_fancy_tab_bar = false
 M.hide_tab_bar_if_only_one_tab = true
 M.tab_bar_at_bottom = false
-
 M.font = wezterm.font({
-	family = "Iosevka",
+	family = "JetBrains Mono",
+	-- family = "MonaspiceNe Nerd Font",
 	harfbuzz_features = {
-		-- "ss01",
+		"ss01",
 		-- "ss02",
-		-- "ss03",
-		-- "ss05",
-		-- "ss06",
-		-- "ss07",
-		-- "ss08",
+		"ss03",
+		"ss05",
+		"ss06",
+		"ss07",
+		"ss08",
 		"calt",
 		"dlig",
 	},
-	weight = "Regular",
+	-- weight = "Medium",
 	italic = false,
 })
 
-M.font_size = 16
-M.line_height = 1
+M.font_size = 12.1
+M.line_height = 1.4
 
 M.color_schemes = require("themes")
 M.color_scheme = "tokyonight"

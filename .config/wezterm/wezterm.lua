@@ -4,6 +4,7 @@ local config = {}
 if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
+config.cursor_blink_rate = 0
 
 -- ── Binds ────────────────────────────────────
 config.disable_default_key_bindings = true

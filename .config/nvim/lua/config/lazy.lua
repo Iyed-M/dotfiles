@@ -1,9 +1,4 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-local colorscheme = "tokyonight"
-
-if vim.g.nvchad_enabled then
-  colorscheme = "default"
-end
 
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   -- bootstrap lazy.nvim
@@ -22,7 +17,7 @@ require("lazy").setup({
       "LazyVim/LazyVim",
       ---@type LazyVimConfig
       opts = {
-        colorscheme = { colorscheme },
+        -- colorscheme = { colorscheme },
         defaults = { keymaps = false },
       },
       import = "lazyvim.plugins",

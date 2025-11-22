@@ -1,5 +1,5 @@
-if false then
-  require("avante")
+if true then
+  return {}
 end
 return {
   "yetone/avante.nvim",

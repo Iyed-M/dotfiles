@@ -241,7 +241,7 @@ return {
     optional = true,
     dependencies = {
       {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         optional = true,
         opts = function(_, opts)
           opts.ensure_installed = opts.ensure_installed or {}
