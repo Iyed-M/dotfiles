@@ -136,7 +136,7 @@ return {
       {
         "<Leader>O",
         function()
-          require("oil").open_float(vim.fn.getcwd())
+          require("oil").open(vim.fn.getcwd())
           -- require("oil.util").run_after_load(0, function()
           --   require("oil").open_preview()
           -- end)
@@ -147,7 +147,7 @@ return {
       {
         "<Leader>o",
         function()
-          require("oil").open_float()
+          require("oil").open()
           -- require("oil.util").run_after_load(0, function()
           --   require("oil").open_preview()
           -- end)

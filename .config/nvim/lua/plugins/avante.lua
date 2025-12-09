@@ -1,6 +1,7 @@
 if true then
   return {}
 end
+
 return {
   "yetone/avante.nvim",
   event = "VeryLazy",
@@ -11,6 +12,10 @@ return {
     copilot = {
       model = "claude-3.5-sonnet",
     },
+    selection = {
+      hint_display = "none",
+    },
+
     ---Specify the special dual_boost mode
     ---1. enabled: Whether to enable dual_boost mode. Default to false.
     ---2. first_provider: The first provider to generate response. Default to "openai".
@@ -28,10 +33,10 @@ return {
       timeout = 60000, -- Timeout in milliseconds
     },
     behaviour = {
-      auto_suggestions = false, -- Experimental stage
+      auto_suggestions = true, -- Experimental stage
       auto_set_highlight_group = true,
-      auto_set_keymaps = true,
-      auto_apply_diff_after_generation = false,
+      auto_set_keymaps = false,
+      auto_apply_diff_after_generation = true,
       support_paste_from_clipboard = false,
     },
     mappings = {
@@ -73,12 +78,12 @@ return {
       wrap = true, -- similar to vim.o.wrap
       width = 50, -- default % based on available width
       sidebar_header = {
-        enabled = true, -- true, false to enable/disable the header
+        enabled = false, -- true, false to enable/disable the header
         align = "center", -- left, center, right for title
         rounded = true,
       },
       input = {
-        prefix = "> ",
+        prefix = "",
         height = 8, -- Height of the input window in vertical layout
       },
       edit = {

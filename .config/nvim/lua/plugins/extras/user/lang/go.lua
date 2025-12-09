@@ -7,6 +7,12 @@ return {
   },
   config = function()
     require("gopher").setup({
+      gotag = {
+        transform = "camelcase",
+
+        -- default tags to add to struct fields
+        default_tag = "json",
+      },
       commands = {
         go = "go",
         gomodifytags = "gomodifytags",

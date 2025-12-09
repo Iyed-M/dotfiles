@@ -17,7 +17,7 @@ require("lazy").setup({
       "LazyVim/LazyVim",
       ---@type LazyVimConfig
       opts = {
-        -- colorscheme = { colorscheme },
+        colorscheme = { "catppuccin" },
         defaults = { keymaps = false },
       },
       import = "lazyvim.plugins",
@@ -45,8 +45,8 @@ require("lazy").setup({
       -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
-        -- "matchit",
-        -- "matchparen",
+        "matchit",
+        "matchparen",
         "netrwPlugin",
         "tarPlugin",
         "tohtml",

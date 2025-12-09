@@ -140,6 +140,10 @@ nmap("<Leader><Space>", function()
   Snacks.picker.smart({ multi = { "files" } })
 end, "smart find files")
 
+nmap("<Leader>sz", function()
+  Snacks.picker.zoxide()
+end, "zoxide")
+
 -- ── lazygit ───────────────────────────────────────────────────
 map({ "n", "v" }, "<leader>lg", function()
   require("snacks").lazygit({ cwd = LazyVim.root.git() })
@@ -174,6 +178,7 @@ map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 -- ── Toggle Context ────────────────────────────────────────────
 map("n", "<leader>ux", "<CMD>TSContextToggle<CR>", { desc = "Toggle Context" })
 map("n", "<leader>ug", "<CMD>Gitsigns toggle_signs<CR>", { desc = "Toggle Git Signs" })
+map("n", "<leader>uz", Snacks.toggle.zen, { desc = "Toggle Zen mode" })
 
 -- Move Lines
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move Down" })

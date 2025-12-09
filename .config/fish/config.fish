@@ -48,6 +48,8 @@ set -x RUSTUP_HOME $XDG_DATA_HOME/rustup
 set -x GOPATH $XDG_DATA_HOME/go
 set -x GOBIN $GOPATH/bin
 fish_add_path -P $GOBIN
+set -x BUN_BIN $HOME/.cache/.bun/bin
+fish_add_path -P $BUN_BIN
 set -x BROWSER zen-browser
 set -x FILEMANAGER thunar
 set -x EDITOR nvim
@@ -121,3 +123,5 @@ end
 
 source ~/.config/fish/current_theme.fish
 fish_vi_key_bindings
+
+thefuck --alias | source

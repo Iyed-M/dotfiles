@@ -10,7 +10,53 @@ return {
         tsserver = {
           enabled = false,
         },
+        tsgo = {
+          cmd = { "tsgo", "--lsp", "--stdio" },
+          filetypes = {
+            "javascript",
+            "javascriptreact",
+            "javascript.jsx",
+            "typescript",
+            "typescriptreact",
+            "typescript.tsx",
+          },
+          root_markers = {
+            "tsconfig.json",
+            "jsconfig.json",
+            "package.json",
+            ".git",
+            "tsconfig.base.json",
+          },
+          enabled = true,
+          settings = {
+            complete_function_calls = true,
+            tsgo = {
+              enableMoveToFileCodeAction = true,
+              autoUseWorkspaceTsdk = true,
+              experimental = {
+                completion = {
+                  enableServerSideFuzzyMatch = true,
+                },
+              },
+            },
+            typescript = {
+              updateImportsOnFileMove = { enabled = "always" },
+              suggest = {
+                completeFunctionCalls = true,
+              },
+              inlayHints = {
+                enumMemberValues = { enabled = false },
+                functionLikeReturnTypes = { enabled = false },
+                parameterNames = { enabled = false },
+                parameterTypes = { enabled = false },
+                propertyDeclarationTypes = { enabled = false },
+                variableTypes = { enabled = false },
+              },
+            },
+          },
+        },
         vtsls = {
+          enabled = false,
           -- explicitly add default filetypes, so that we can extend
           -- them in related extras
           filetypes = {
@@ -162,6 +208,7 @@ return {
     "dmmulroy/tsc.nvim",
     -- event = "VeryLazy",
     ft = { "typescript", "typescriptreact" },
+    opts = {},
     keys = {
       {
         "<Leader>lss",
@@ -190,12 +237,25 @@ return {
       run_as_monorepo = true,
       enable_progress_notifications = true,
       enable_error_notifications = true,
-      -- flags = {
-      --   watch = true,
-      -- },
+      bin_path = os.getenv("BUN_BIN") .. "/tsgo",
+      flags = {},
       hide_progress_notifications_from_history = true,
       spinner = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" },
       pretty_errors = true,
     },
+  },
+  { "arthur944/neotest-bun" },
+  {
+    "nvim-neotest/neotest",
+    requires = {
+      "arthur944/neotest-bun",
+    },
+    config = function()
+      require("neotest").setup({
+        adapters = {
+          require("neotest-bun"),
+        },
+      })
+    end,
   },
 }
